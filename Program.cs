@@ -11,8 +11,6 @@ logger.Info("Program started");
 string marioFileName = "mario.json";
 List<Mario> marios = JsonSerializer.Deserialize<List<Mario>>(File.ReadAllText(marioFileName))!;
 
-logger.Info("Program ended");
-
 do
 {
   // display choices to user
@@ -27,26 +25,36 @@ do
 
   if (choice == "1")
   {
-        foreach(var c in marios)
+    // Display Mario Characters
+    foreach(var c in marios)
     {
       Console.WriteLine(c.Display());
     }
-
   }
   else if (choice == "2")
   {
     // Add Mario Character
-        // Generate unique Id
+    // Generate unique Id
     Mario mario = new()
     {
       Id = marios.Count == 0 ? 1 : marios.Max(c => c.Id) + 1
-          // Input Name, Descriptio
     };
-        // Input Name, Description
+    // Input Name, Description
     Console.WriteLine("Enter Name:");
     mario.Name = Console.ReadLine();
     Console.WriteLine("Enter Description:");
     mario.Description = Console.ReadLine();
+    // Input Alias
+    List<string> list = [];
+    do {
+      Console.WriteLine($"Enter Alias or enter to quit:");
+      string response = Console.ReadLine()!;
+      if (string.IsNullOrEmpty(response)){
+        break;
+      }
+      list.Add(response);
+    } while (true);
+    mario.Alias = list;
   }
   else if (choice == "3")
   {
@@ -58,3 +66,4 @@ do
   }
 } while (true);
 
+logger.Info("Program ended");
