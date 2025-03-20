@@ -9,7 +9,7 @@ var logger = LogManager.Setup().LoadConfigurationFromFile(path).GetCurrentClassL
 logger.Info("Program started");
 
 // deserialize mario json from file into List<Mario>
-string marioFileName = "mario.json";
+string marioFileName = "mario-rename.json";
 List<Mario> marios = [];
  // check if file exists
  if (File.Exists(marioFileName))
@@ -24,6 +24,12 @@ do
   Console.WriteLine("1) Display Mario Characters");
   Console.WriteLine("2) Add Mario Character");
   Console.WriteLine("3) Remove Mario Character");
+  Console.WriteLine("4) Display Donkey kong chareaters");
+  Console.WriteLine("5) Add Donkey kong character");
+  Console.WriteLine("6) Remove Donkey Kong character");
+  Console.WriteLine("7) Display Street Fighter 2 chraracters");
+  Console.WriteLine("8) Add Street Fighter 2 chraracter");
+  Console.WriteLine("9) Remove Street Fighter 2 chraracter");
   Console.WriteLine("Press enter to quit");
 
   // input selection
