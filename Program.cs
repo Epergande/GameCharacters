@@ -24,6 +24,13 @@ if (File.Exists(dkFileName))
   dks = JsonSerializer.Deserialize<List<Dk>>(File.ReadAllText(dkFileName))!;
   logger.Info($"File deserialized {dkFileName}");
 }
+string sfFileName = "sf.json";
+List<Sf> sfs = [];
+if (File.Exists(sfFileName))
+{
+  sfs = JsonSerializer.Deserialize<List<Sf>>(File.ReadAllText(sfFileName))!;
+  logger.Info($"File deserialized {sfFileName}");
+}
 do
 {
   // display choices to user
@@ -123,6 +130,14 @@ do
      } else {
        logger.Error("Invalid Id");
      }
+  }
+  else if (choice == "7")
+  {
+    // Display sf2 Characters
+    foreach(var c in sfs)
+    {
+      Console.WriteLine(c.Display());
+    }
   }
    else if (string.IsNullOrEmpty(choice)) {
     break;
