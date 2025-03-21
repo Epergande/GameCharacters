@@ -17,7 +17,13 @@ List<Mario> marios = [];
    marios = JsonSerializer.Deserialize<List<Mario>>(File.ReadAllText(marioFileName))!;
    logger.Info($"File deserialized {marioFileName}");
  }
-
+string dkFileName = "dk.json";
+List<Dk> dks = [];
+if (File.Exists(dkFileName))
+{
+  dks = JsonSerializer.Deserialize<List<Dk>>(File.ReadAllText(dkFileName))!;
+  logger.Info($"File deserialized {dkFileName}");
+}
 do
 {
   // display choices to user
@@ -76,10 +82,19 @@ do
      } else {
        logger.Error("Invalid Id");
      }
-  } else if (string.IsNullOrEmpty(choice)) {
+  }
+    else if (choice == "4")
+  {
+    // Display Mario Characters
+    foreach(var c in dks)
+    {
+      Console.WriteLine(c.Display());
+    }
+  }
+   else if (string.IsNullOrEmpty(choice)) {
     break;
   } else {
-    logger.Info("Invalid choice");
+    logger.Info("Yeah,No, Invalid choice");
   }
 } while (true);
 
