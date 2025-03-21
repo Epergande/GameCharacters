@@ -152,6 +152,26 @@ do
      File.WriteAllText(sfFileName, JsonSerializer.Serialize(sfs));
      logger.Info($"Character added: {sf.Name}");
   }
+    else if (choice == "9")
+  {
+    // Remove sf2 Character
+    Console.WriteLine("Enter the Id of the character to remove:");
+     if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id))
+     {
+       Sf? character = sfs.FirstOrDefault(c => c.Id == Id);
+       if (character == null)
+       {
+         logger.Error($"Character Id {Id} not found");
+       } else {
+        sfs.Remove(character);
+         // serialize list<marioCharacter> into json file
+         File.WriteAllText(sfFileName, JsonSerializer.Serialize(sfs));
+         logger.Info($"Character Id {Id} removed");
+       }
+     } else {
+       logger.Error("Invalid Id");
+     }
+  }
    else if (string.IsNullOrEmpty(choice)) {
     break;
   } else {
