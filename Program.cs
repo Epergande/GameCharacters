@@ -91,6 +91,20 @@ do
       Console.WriteLine(c.Display());
     }
   }
+    else if (choice == "5")
+  {
+    // Add dk Character
+    // Generate unique Id
+    Dk dk = new()
+    {
+      Id = dks.Count == 0 ? 1 : dks.Max(c => c.Id) + 1
+    };
+    InputCharacter(dk);
+        dks.Add(dk);
+     File.WriteAllText(dkFileName, JsonSerializer.Serialize(dks));
+     logger.Info($"Character added: {dk.Name}");
+  }
+
    else if (string.IsNullOrEmpty(choice)) {
     break;
   } else {
