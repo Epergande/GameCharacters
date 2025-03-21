@@ -139,6 +139,19 @@ do
       Console.WriteLine(c.Display());
     }
   }
+      else if (choice == "8")
+  {
+    // Add sf2 Character
+    // Generate unique Id
+    Sf sf = new()
+    {
+      Id = sfs.Count == 0 ? 1 : sfs.Max(c => c.Id) + 1
+    };
+    InputCharacter(sf);
+        sfs.Add(sf);
+     File.WriteAllText(sfFileName, JsonSerializer.Serialize(sfs));
+     logger.Info($"Character added: {sf.Name}");
+  }
    else if (string.IsNullOrEmpty(choice)) {
     break;
   } else {
