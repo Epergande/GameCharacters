@@ -104,7 +104,26 @@ do
      File.WriteAllText(dkFileName, JsonSerializer.Serialize(dks));
      logger.Info($"Character added: {dk.Name}");
   }
-
+  else if (choice == "6")
+  {
+    // Remove dk Character
+    Console.WriteLine("Enter the Id of the character to remove:");
+     if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id))
+     {
+       Dk? character = dks.FirstOrDefault(c => c.Id == Id);
+       if (character == null)
+       {
+         logger.Error($"Character Id {Id} not found");
+       } else {
+        dks.Remove(character);
+         // serialize list<marioCharacter> into json file
+         File.WriteAllText(dkFileName, JsonSerializer.Serialize(dks));
+         logger.Info($"Character Id {Id} removed");
+       }
+     } else {
+       logger.Error("Invalid Id");
+     }
+  }
    else if (string.IsNullOrEmpty(choice)) {
     break;
   } else {
