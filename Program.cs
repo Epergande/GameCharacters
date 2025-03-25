@@ -214,8 +214,30 @@ do
    }
    else if (choice2 == "2")
    {
-// edit dk
-
+    Console.WriteLine("Enter the Id of the character to edit:");
+     if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id2))
+     {
+       Dk? character = dks.FirstOrDefault(c => c.Id == Id2);
+       if (character == null)
+       {
+         logger.Error($"Character Id {Id2} not found");
+       } else {
+        dks.Remove(character);
+         // serialize list<marioCharacter> into json file
+         File.WriteAllText(dkFileName, JsonSerializer.Serialize(dks));
+         logger.Info($"Character Id {Id2} removed");
+       }
+     } else {
+       logger.Error("Invalid Id");
+     }
+    Dk dk = new()
+    {
+      Id = Id2
+    };
+    InputCharacter(dk);
+        dks.Add(dk);
+     File.WriteAllText(dkFileName, JsonSerializer.Serialize(dks));
+     logger.Info($"Character edited: {dk.Name}");
    }
    else if (choice2 == "3")
    {
