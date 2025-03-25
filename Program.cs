@@ -43,6 +43,7 @@ do
   Console.WriteLine("7) Display Street Fighter 2 chraracters");
   Console.WriteLine("8) Add Street Fighter 2 chraracter");
   Console.WriteLine("9) Remove Street Fighter 2 chraracter");
+  Console.WriteLine("10) Edit a character");
   Console.WriteLine("Press enter to quit");
 
   // input selection
@@ -171,6 +172,27 @@ do
      } else {
        logger.Error("Invalid Id");
      }
+  }
+  else if (choice == "10")
+  {
+    //ediing characters
+    Console.WriteLine("What list do you want to edit?");
+    Console.WriteLine("1) Mario");
+    Console.WriteLine("2) DK");
+    Console.WriteLine("3) Sf2");
+    string? choice2 = Console.ReadLine();
+   if (choice2 == "1")
+   {
+
+   }
+   else if (choice2 == "2")
+   {
+
+   }
+   else if (choice2 == "3")
+   {
+
+   }   
   }
    else if (string.IsNullOrEmpty(choice)) {
     break;
