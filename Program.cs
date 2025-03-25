@@ -242,7 +242,30 @@ do
    else if (choice2 == "3")
    {
 //edit sf2
-
+    Console.WriteLine("Enter the Id of the character to edit:");
+     if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id2))
+     {
+       Sf? character = sfs.FirstOrDefault(c => c.Id == Id2);
+       if (character == null)
+       {
+         logger.Error($"Character Id {Id2} not found");
+       } else {
+        sfs.Remove(character);
+         // serialize list<marioCharacter> into json file
+         File.WriteAllText(sfFileName, JsonSerializer.Serialize(sfs));
+         logger.Info($"Character Id {Id2} removed");
+       }
+     } else {
+       logger.Error("Invalid Id");
+     }
+         Sf sf = new()
+    {
+      Id = Id2
+    };
+    InputCharacter(sf);
+        sfs.Add(sf);
+     File.WriteAllText(sfFileName, JsonSerializer.Serialize(sfs));
+     logger.Info($"Character edited: {sf.Name}");
    }   
   }
    else if (string.IsNullOrEmpty(choice)) {
