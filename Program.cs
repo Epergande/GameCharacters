@@ -181,16 +181,45 @@ do
     Console.WriteLine("2) DK");
     Console.WriteLine("3) Sf2");
     string? choice2 = Console.ReadLine();
+
    if (choice2 == "1")
    {
+    //edit mario
+        Console.WriteLine("Enter the Id of the character to edit:");
+     if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id2))
+     {
+       Mario? character = marios.FirstOrDefault(c => c.Id == Id2);
+       if (character == null)
+       {
+         logger.Error($"Character Id {Id2} not found");
+       } else {
+        marios.Remove(character);
+         // serialize list<marioCharacter> into json file
+         File.WriteAllText(marioFileName, JsonSerializer.Serialize(marios));
+         logger.Info($"Character Id {Id2} removed");
+       }
+     } else {
+       logger.Error("Invalid Id");
+     }
 
+
+         Mario mario = new()
+    {
+      Id = Id2
+    };
+    InputCharacter(mario);
+        marios.Add(mario);
+     File.WriteAllText(marioFileName, JsonSerializer.Serialize(marios));
+     logger.Info($"Character edited: {mario.Name}");
    }
    else if (choice2 == "2")
    {
+// edit dk
 
    }
    else if (choice2 == "3")
    {
+//edit sf2
 
    }   
   }
